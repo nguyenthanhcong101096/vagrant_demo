@@ -1,6 +1,6 @@
 ---
 working_dir: /home/vagrant
-project_dir: /home/vagrant/mina_rails
+project_dir: /home/vagrant/data/mina_rails
 repo:        https://github.com/nguyenthanhcong101096/mina_rails.git 
 
 ruby:
