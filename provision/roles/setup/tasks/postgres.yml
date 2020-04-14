@@ -24,6 +24,7 @@
     db:       "{{ database.name }}"
     name:     "{{ database.user }}"
     password: "{{ database.password }}"
+    role_attr_flags: CREATEDB,NOSUPERUSER
 
 - name: grant user for database
   become_user: postgres
