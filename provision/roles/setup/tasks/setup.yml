@@ -1,18 +1,25 @@
 ---
-- name: Ansible check versions {{ ruby_version }} exists.
+- name: Ansible check versions {{ ruby.version }} exists.
   stat:
-    path: "{{ setup.working_dir }}/mina_rails"
+    path: "{{ project_dir }}"
   register: dir_project
 
 - name: clone project
   git: 
-    repo: https://github.com/nguyenthanhcong101096/mina_rails.git 
-    dest: "{{ setup.working_dir }}/mina_rails"
+    repo: "{{ repo }}"
+    dest: "{{ project_dir }}"
   when: dir_project.stat.exists == False
 
 - name: Change permission
   file:
-    path: /home/vagrant/mina_rails
+    path: "{{ project_dir }}"
     owner: vagrant
     group: vagrant
     recurse: yes
+
+- name: copy file database.yml
+  copy:
+    src: templates/database.yml
+    dest: "{{ project_dir }}/config/database.yml"
+    owner: vagrant
+    group: vagrant

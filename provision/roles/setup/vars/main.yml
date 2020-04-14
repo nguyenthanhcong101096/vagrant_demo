@@ -1,9 +1,13 @@
 ---
-setup:
-  working_dir: /home/vagrant
-  owner: vagrant
-  group: vagrant
+working_dir: /home/vagrant
+project_dir: /home/vagrant/mina_rails
+repo:        https://github.com/nguyenthanhcong101096/mina_rails.git 
 
 ruby:
   rbenv_root: /home/vagrant/.rbenv
-  version: 2.6.5
+  version:    2.6.5
+
+database:
+  user:     vagrant
+  password: password
+  name:     test_development

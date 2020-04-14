@@ -20,17 +20,27 @@
 - name: Change rbenv permission
   file:
     path: "{{ ruby.rbenv_root }}"
-    owner: "{{ setup.owner }}"
-    group: "{{ setup.group }}"
+    owner: vagrant
+    group: vagrant
 
 - name: Add rbenv path
-  lineinfile: line='export PATH="$HOME/.rbenv/bin:$PATH"' path="{{ setup.working_dir }}/.bashrc" insertafter=EOF
+  lineinfile: line='export PATH="$HOME/.rbenv/bin:$PATH"' path="{{ working_dir }}/.bashrc" insertafter=EOF
 
 - name: Add rbenv init
-  lineinfile: line='eval "$(rbenv init -)"' path="{{ setup.working_dir }}/.bashrc" insertafter=EOF
+  lineinfile: line='eval "$(rbenv init -)"' path="{{ working_dir }}/.bashrc" insertafter=EOF
 
 - name: Download ruby build
   git: repo=https://github.com/rbenv/ruby-build.git dest="{{ ruby.rbenv_root }}/plugins/ruby-build"
 
 - name: 'Add ruby build'
-  lineinfile: line='export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' dest="{{ setup.working_dir }}/.bashrc"
+  lineinfile: line='export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' dest="{{ working_dir }}/.bashrc"
+
+- name: tao rbenv.sh vao /etc/profile.d/ de tu load
+  become: yes
+  template: src=files/rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh
+
+- name: Install ruby {{ ruby.version }}
+  command: sudo -iu vagrant rbenv install {{ ruby.version }}
+
+- name: Set global ruby {{ ruby.version }}
+  command: sudo -iu vagrant rbenv global {{ ruby.version }}

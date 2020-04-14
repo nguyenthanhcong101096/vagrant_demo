@@ -1,0 +1,5 @@
+if [ -d /home/vagrant/.rbenv ]; then
+  export RBENV_ROOT=/home/vagrant/.rbenv
+  export PATH="$RBENV_ROOT/bin:$PATH"
+  eval "$(rbenv init -)"
+fi

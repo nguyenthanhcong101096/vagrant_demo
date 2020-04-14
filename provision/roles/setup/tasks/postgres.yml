@@ -16,21 +16,21 @@
 - name: create database
   become_user: postgres
   postgresql_db:
-    name: test_development
+    name: "{{ database.name }}"
 
 - name: create user of database
   become_user: postgres
   postgresql_user:
-    db: test_development
-    name: vagrant
-    password: password
+    db:       "{{ database.name }}"
+    name:     "{{ database.user }}"
+    password: "{{ database.password }}"
 
 - name: grant user for database
   become_user: postgres
   postgresql_privs:
-    db: test_development
+    db:    "{{ database.name }}"
     state: present
-    priv: ALL
-    objs: ALL_IN_SCHEMA
-    role: vagrant
+    priv:  ALL
+    objs:  ALL_IN_SCHEMA
+    role:  vagrant
   
