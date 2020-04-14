@@ -16,7 +16,7 @@ yarn install
 /bin/webpack
 
 rails db:create db:migrate db:seed
-rails s
+rails s -b 0.0.0.0
 ```
 
 # Sử dụng Vagrant tạo và quản lý máy ảo
