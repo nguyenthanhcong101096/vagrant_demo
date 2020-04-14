@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/trusty64" 
 
-  config.vm.synced_folder '.', '/home/vagrant'
+  config.vm.synced_folder '.', '/data'
   
   config.vm.provider "virtualbox" do |vb|
     vb.cpus   = 2
@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   end
     
   config.vm.network "forwarded_port", guest: 3000, host: 3001
-  config.vm.network "private_network", ip: "192.168.10.4"
+  config.vm.network "private_network", ip: "192.168.10.5"
 
   config.vm.provision "shell", privileged: false, run: "always", path: "provision/necessary.sh"
 

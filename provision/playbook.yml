@@ -1,6 +1,5 @@
 ---
-  - name: "Provision Image"
-    hosts: default
+  - hosts: default
     become: true
     roles:
       - setup

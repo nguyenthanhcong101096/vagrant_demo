@@ -5,7 +5,9 @@
   register: dir_project
 
 - name: clone project
-  git: repo=https://github.com/nguyenthanhcong101096/mina_rails.git dest="{{ setup.working_dir }}/mina_rails"
+  git: 
+    repo: https://github.com/nguyenthanhcong101096/mina_rails.git 
+    dest: "{{ setup.working_dir }}/mina_rails"
   when: dir_project.stat.exists == False
 
 - name: Change permission
@@ -13,9 +15,4 @@
     path: /home/vagrant/mina_rails
     owner: vagrant
     group: vagrant
-
-- name: install bundler
-  command: gem install bundler
-
-- name: install rails
-  command: gem install rails
+    recurse: yes

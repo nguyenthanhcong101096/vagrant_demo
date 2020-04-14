@@ -1,6 +1,6 @@
 ---
-- import_tasks: node.yml
-- import_tasks: redis.yml
-- import_tasks: postgres.yml
-- import_tasks: rbenv.yml
+# - import_tasks: node.yml
+# - import_tasks: redis.yml
+# - import_tasks: postgres.yml
+# - import_tasks: rbenv.yml
 - import_tasks: setup.yml
