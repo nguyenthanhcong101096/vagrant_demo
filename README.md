@@ -1,4 +1,24 @@
 ![](https://www.vagrantup.com/assets/images/og-image-9baf72d1.png)
+# setup
+- cd /PATH/TO/vagrant
+```
+vagrant up
+vagrant ssh
+
+```
+- cd /PATH/TO/app
+
+```
+bundler install
+gem install bundler
+
+yarn install
+/bin/webpack
+
+rails db:create db:migrate db:seed
+rails s
+```
+
 # Sử dụng Vagrant tạo và quản lý máy ảo
 ### Công cụ vagrant là gì
 - Vagrant là một công cụ tương tác với các nền tảng ảo hóa như VirtualBox, HyperV, VM ..., nó giúp tạo và quản lý các máy ảo trên các nền tảng đó. Vagrant cung cấp một cấu hình đơn giản tạo và quản lý, tương tác với máy ảo mà không có nhiều sự khác biệt dù bạn đang sử dụng VirtualBox, VM hay HyperV
