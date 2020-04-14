@@ -3,7 +3,8 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/trusty64" 
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.define 'rails-apps-box'
 
   config.vm.synced_folder '.', '/data'
   
@@ -11,10 +12,9 @@ Vagrant.configure("2") do |config|
     vb.cpus   = 2
     vb.memory = "1024"
   end
-    
-  config.vm.box = "precise32"
-  config.vm.network "forwarded_port", guest: 3000, host: 3001, protocol: "tcp"
+
   config.vm.network "private_network", ip: "192.168.10.5"
+  config.vm.network "forwarded_port", guest: 3000, host: 3001
 
   config.vm.provision "shell", privileged: false, run: "always", path: "provision/necessary.sh"
 
