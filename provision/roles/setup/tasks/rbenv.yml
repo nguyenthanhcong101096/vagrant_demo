@@ -1,0 +1,36 @@
+---
+- name: Installs necessary packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - autoconf 
+    - bison 
+    - build-essential 
+    - libssl-dev 
+    - libyaml-dev 
+    - libreadline6-dev 
+    - zlib1g-dev 
+    - libncurses5-dev 
+    - libffi-dev 
+    - libgdbm3 
+    - libgdbm-dev
+
+- name: git clone rbenv
+  git: repo=https://github.com/rbenv/rbenv.git dest="{{ ruby.rbenv_root }}"
+
+- name: Change rbenv permission
+  file:
+    path: "{{ ruby.rbenv_root }}"
+    owner: "{{ setup.owner }}"
+    group: "{{ setup.group }}"
+
+- name: Add rbenv path
+  lineinfile: line='export PATH="$HOME/.rbenv/bin:$PATH"' path="{{ setup.working_dir }}/.bashrc" insertafter=EOF
+
+- name: Add rbenv init
+  lineinfile: line='eval "$(rbenv init -)"' path="{{ setup.working_dir }}/.bashrc" insertafter=EOF
+
+- name: Download ruby build
+  git: repo=https://github.com/rbenv/ruby-build.git dest="{{ ruby.rbenv_root }}/plugins/ruby-build"
+
+- name: 'Add ruby build'
+  lineinfile: line='export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' dest="{{ setup.working_dir }}/.bashrc"

@@ -1,0 +1,9 @@
+---
+setup:
+  working_dir: /home/vagrant
+  owner: vagrant
+  group: vagrant
+
+ruby:
+  rbenv_root: /home/vagrant/.rbenv
+  version: 2.6.5
