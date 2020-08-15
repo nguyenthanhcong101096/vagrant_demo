@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.define 'rails-apps-box'
 
   config.vm.synced_folder '.', '/data'
-  
+
   config.vm.provider "virtualbox" do |vb|
     vb.cpus   = 2
     vb.memory = "1024"
