@@ -1,3 +1,5 @@
 /.vagrant/machines
 /.vagrant/provisioners
 /mina_rails
+/centos/.vagrant
+/ubuntu/.vagrant
