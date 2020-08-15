@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Tạo máy ảo từ box centos/7, gán địa chỉ IP, đặt hostname, gán 2GB bộ nhớ, 2 cpus 
+# Tạo máy ảo từ box centos/7, gán địa chỉ IP, đặt hostname, gán 2GB bộ nhớ, 2 cpus
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.network "private_network", ip: "172.16.10.105"
@@ -13,9 +13,8 @@ Vagrant.configure("2") do |config|
      vb.memory = "1024"
   end
 
-  config.vm.provision "shell", inline: <<-SHELL
-    echo "password" | passwd --stdin root
-    sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-    systemctl reload sshd
-  SHELL
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   echo "root:password" | chpasswd
+  #   sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  # SHELL
 end
