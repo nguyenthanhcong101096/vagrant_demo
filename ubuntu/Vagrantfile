@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       apt-get update
       apt-get install -y git wget nano curl
 
-      echo "123" | passwd -dl root
+      echo "root:password" | chpasswd
       sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
       systemctl reload sshd
     SHELL
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
       apt-get update
       apt-get install -y git wget nano 
 
-      echo "123" | passwd -dl root
+      echo "root:password" | chpasswd
       sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
       systemctl reload sshd
     SHELL
@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
       apt-get update
       apt-get install -y git wget nano curl
 
-      echo "123" | passwd -dl root
+      echo "root:password" | chpasswd
       sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
       systemctl reload sshd
     SHELL
