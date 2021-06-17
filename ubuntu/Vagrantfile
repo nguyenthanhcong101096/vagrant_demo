@@ -1,6 +1,6 @@
 
 Vagrant.configure("2") do |config|
-  ####################### VPS1 #######################
+  config.ssh.password = 'password'
   config.vm.box = "ubuntu/bionic64"
   config.vm.define "master" do |w|
     w.vm.hostname = "master"
@@ -11,60 +11,17 @@ Vagrant.configure("2") do |config|
       vb.name = "master"
     end
     
-    w.vm.provision "shell", path: "install-package.sh"
+    w.vm.provision "shell", path: "install_package.sh"
     w.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y git wget nano curl
 
-      echo "root:password" | chpasswd
-      sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-      systemctl reload sshd
+      echo -e "password\npassword" | passwd root
+      echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+      sed -in 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+      service ssh restart
+
+      echo "############# DONE ###############"
     SHELL
   end
-  
-  ####################### VPS2 #######################
-  config.vm.box = "ubuntu/bionic64"
-  config.vm.define "worker-1" do |w|
-    w.vm.hostname = "worker-1"
-    w.vm.network "private_network", ip: "192.168.33.14"
-
-    w.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-      vb.cpus = 1
-      vb.name = "worker-1"
-    end
-    
-    w.vm.provision "shell", path: "install-package.sh"
-    w.vm.provision "shell", inline: <<-SHELL
-      apt-get update
-      apt-get install -y git wget nano 
-
-      echo "root:password" | chpasswd
-      sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-      systemctl reload sshd
-    SHELL
-  end
- 
-  ####################### VPS3 #######################
-  config.vm.box = "ubuntu/bionic64"
-  config.vm.define "worker-2" do |w|
-    w.vm.hostname = "worker-2"
-    w.vm.network "private_network", ip: "192.168.33.15"
-
-    w.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-      vb.cpus = 1
-      vb.name = "worker-2"
-    end
-
-    w.vm.provision "shell", path: "install-package.sh"
-    w.vm.provision "shell", inline: <<-SHELL
-      apt-get update
-      apt-get install -y git wget nano curl
-
-      echo "root:password" | chpasswd
-      sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-      systemctl reload sshd
-    SHELL
-  end  
 end
