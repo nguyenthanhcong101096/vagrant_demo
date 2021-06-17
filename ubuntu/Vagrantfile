@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
       vb.name = "master"
     end
     
-    w.vm.provision "setup-hosts", type: "shell", path: "install-package.sh"
+    w.vm.provision "shell", path: "install-package.sh"
     w.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y git wget nano curl
@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
       vb.name = "worker-1"
     end
     
-    w.vm.provision "setup-hosts", type: "shell", path: "install-package.sh"
+    w.vm.provision "shell", path: "install-package.sh"
     w.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y git wget nano 
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
       vb.name = "worker-2"
     end
 
-    w.vm.provision "setup-hosts", type: "shell", path: "install-package.sh"
+    w.vm.provision "shell", path: "install-package.sh"
     w.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y git wget nano curl
