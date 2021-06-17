@@ -4,17 +4,22 @@
 # Tạo máy ảo từ box centos/7, gán địa chỉ IP, đặt hostname, gán 2GB bộ nhớ, 2 cpus 
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
-  config.vm.network "private_network", ip: "172.16.10.104"
-  config.vm.hostname = "centos"
+  config.vm.network "private_network", ip: "172.16.10.100"
+  config.vm.hostname = "master.congnt"
 
   config.vm.provider "virtualbox" do |vb|
-     vb.name = "centos"
-     vb.cpus = 1
-     vb.memory = "1024"
+     vb.name = "master.congnt"
+     vb.cpus = 2
+     vb.memory = "2048"
   end
 
+  # Chạy file install-docker-kube.sh sau khi nạp Box
+  config.vm.provision "shell", path: "install-package.sh"
+
+  # Chạy các lệnh shell
   config.vm.provision "shell", inline: <<-SHELL
-    echo "password" | passwd --stdin root
+    # Đặt pass 123 có tài khoản root và cho phép SSH
+    echo "123" | passwd --stdin root
     sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
     systemctl reload sshd
   SHELL

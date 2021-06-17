@@ -1,1 +1,0 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/Users/mac/Documents/Learn/vagrant_file/centos","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
