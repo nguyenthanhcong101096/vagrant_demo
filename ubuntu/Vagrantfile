@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
       vb.name = "master"
     end
-    
+
     w.vm.provision "shell", path: "install_package.sh"
     w.vm.provision "shell", inline: <<-SHELL
       apt-get update
