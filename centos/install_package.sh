@@ -3,7 +3,7 @@
 # Cập nhật 12/2019
 
 # Cai dat Docker
-yum install -y yum-utils device-mapper-persistent-data lvm2
+yum install -y nano yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum update -y && yum install docker-ce-18.06.2.ce -y
 usermod -aG docker $(whoami)
@@ -58,11 +58,11 @@ swapoff -a
 cat >>/etc/yum.repos.d/kubernetes.repo<<EOF
 [kubernetes]
 name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64/
 enabled=1
 gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
 yum install -y -q kubeadm kubelet kubectl
